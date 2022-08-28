@@ -1,6 +1,6 @@
 import matplotlib.image as image
 import matplotlib.pyplot as plt
-import statistics
+import statistics, os
 
 
 class Processor:
@@ -33,7 +33,8 @@ class Processor:
 
 
 def main():
-    p = Processor('inputs/ps13.jpg')  # move to env var
+    file = os.environ.get('PROCESSING_INPUT_PATH', 'inputs/ps13.jpg')
+    p = Processor(file)
     p.keep_one_colour([156, 70, 99], 15)
     plt.imshow(p.img)
     plt.show()
