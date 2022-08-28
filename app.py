@@ -23,10 +23,18 @@ class Processor:
                 mean = statistics.fmean(self.img[x][y])
                 self.img[x][y] = [mean] * self.depth
 
+    def keep_one_colour(self, colour, threshold):
+        mean_colour = statistics.fmean(colour)
+        for x in range(self.width):
+            for y in range(self.height):
+                mean_img = statistics.fmean(self.img[x][y])
+                if abs(mean_img - mean_colour) > threshold:
+                    self.img[x][y] = [255] * self.depth
+
 
 def main():
-    p = Processor('inputs/apple.jpg')
-    p.to_greyscale()
+    p = Processor('inputs/ps13.jpg')  # move to env var
+    p.keep_one_colour([156, 70, 99], 15)
     plt.imshow(p.img)
     plt.show()
 
