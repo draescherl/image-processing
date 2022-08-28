@@ -1,6 +1,8 @@
+import os
+import statistics
+
 import matplotlib.image as image
 import matplotlib.pyplot as plt
-import statistics, os
 
 
 class Processor:
@@ -33,11 +35,14 @@ class Processor:
 
 
 def main():
-    file = os.environ.get('PROCESSING_INPUT_PATH', 'inputs/ps13.jpg')
-    p = Processor(file)
-    p.keep_one_colour([156, 70, 99], 15)
-    plt.imshow(p.img)
-    plt.show()
+    file = os.environ.get('PROCESSING_INPUT_IMG')
+    try:
+        p = Processor(file)
+        p.keep_one_colour([156, 70, 99], 15)
+        plt.imshow(p.img)
+        plt.show()
+    except (FileNotFoundError, AttributeError):
+        print(f'Invalid input: {file}')
 
 
 if __name__ == '__main__':

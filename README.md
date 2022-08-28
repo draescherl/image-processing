@@ -7,7 +7,7 @@ Playing around with various image processing algorithms
 - Python 3
 - Virtualenv
 - These environment variables set:
-  - `$PROCESSING_INPUT_PATH` (path to the image to process)
+  - `$PROCESSING_INPUT_IMG` (path to the image to process)
 
 ### Running the app
 - Create virtual environment: `python3 -m venv venv`
