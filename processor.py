@@ -30,3 +30,33 @@ class Processor:
                 mean_img = statistics.fmean(self.img[x][y])
                 if abs(mean_img - mean_colour) > threshold:
                     self.img[x][y] = [255] * self.depth
+
+    # def __surrounding_average(self, x, y):
+    #     average = [0] * self.depth
+    #     divisor = 0
+    #     for i in range(-1, 2):
+    #         for j in range(-1, 2):
+    #             if (0 <= x + i < self.width) and (0 <= y + j < self.height):
+    #                 for k in range(self.depth):
+    #                     average[k] += self.img[x + i][y + j][k]
+    #                 divisor += 1
+    #     for k in range(self.depth):
+    #         average[k] /= divisor
+    #     return average
+
+    def __surrounding_mean(self, x, y):
+        surroundings = []
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                try:
+                    surroundings.append(statistics.fmean(self.img[x + i][y + j]))
+                except IndexError:
+                    pass
+        return statistics.fmean(surroundings)
+
+    def blur(self):
+        copy = self.img.copy()
+        for x in range(0, self.width):
+            for y in range(0, self.height):
+                copy[x][y] = self.__surrounding_mean(x, y)
+        self.img = copy.copy()

@@ -9,7 +9,8 @@ def main():
     file = os.environ.get('PROCESSING_INPUT_IMG')
     try:
         p = Processor(file)
-        p.keep_one_colour([156, 70, 99], 15)
+        # p.keep_one_colour([156, 70, 99], 15)
+        p.blur()
         plt.imshow(p.img)
         plt.show()
     except (FileNotFoundError, AttributeError):
